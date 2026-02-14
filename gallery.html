@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <title>Gallery</title>
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <div class="brand">
+        <img src="./assets/icons/icon-192.png" alt="logo">
+        <span>Fish Catch Tracker</span>
+      </div>
+      <div class="nav-links">
+        <a href="./index.html">Dashboard</a>
+        <a href="./catch-form.html">Add Catch</a>
+        <a href="./gallery.html" class="active">Gallery</a>
+        <a href="./map.html">Map</a>
+        <a href="./backup.html">Backup</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Gallery</h1>
+    <div class="filters">
+      <input id="search" placeholder="Search species, nickname, location, notes">
+      <select id="filter-species">
+        <option value="">All species</option>
+      </select>
+      <select id="sort">
+        <option value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+        <option value="heaviest">Heaviest</option>
+        <option value="longest">Longest</option>
+      </select>
+      <label style="display:flex;align-items:center;gap:8px;">
+        <input type="checkbox" id="pb-only">
+        PB only
+      </label>
+      <input type="date" id="from-date" />
+      <input type="date" id="to-date" />
+    </div>
+
+    <div id="gallery" class="gallery-grid"></div>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script type="module" src="./assets/js/gallery.js"></script>
+  <script type="module" src="./assets/js/sw-register.js"></script>
+</body>
+</html>

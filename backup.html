@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <title>Backup / Import</title>
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <div class="brand">
+        <img src="./assets/icons/icon-192.png" alt="logo">
+        <span>Fish Catch Tracker</span>
+      </div>
+      <div class="nav-links">
+        <a href="./index.html">Dashboard</a>
+        <a href="./catch-form.html">Add Catch</a>
+        <a href="./gallery.html">Gallery</a>
+        <a href="./map.html">Map</a>
+        <a href="./backup.html" class="active">Backup</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="grid cards">
+      <div class="card">
+        <h2>Export</h2>
+        <p class="muted">Everything stays local. Export to carry over to another device.</p>
+        <div class="btn-row">
+          <button id="export-json">Download JSON</button>
+          <button id="export-zip" class="secondary">Download ZIP</button>
+          <button id="export-share" class="secondary">Share (if supported)</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Import</h2>
+        <p class="muted">Review summary before applying. JSON always supported; ZIP if present.</p>
+        <input type="file" id="import-file" accept=".json,.zip">
+        <div class="btn-row" style="margin-top:10px;">
+          <button id="import-merge">Import – Merge</button>
+          <button id="import-replace" class="secondary">Import – Replace</button>
+        </div>
+        <pre id="import-preview" class="muted" style="white-space:pre-wrap;"></pre>
+      </div>
+
+      <div class="card">
+        <h2>Reset</h2>
+        <p class="muted">Wipe all local data from this device.</p>
+        <button id="reset-btn" class="btn danger">Reset local data</button>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script type="module" src="./assets/js/backup.js"></script>
+  <script type="module" src="./assets/js/sw-register.js"></script>
+</body>
+</html>
