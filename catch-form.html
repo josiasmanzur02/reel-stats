@@ -1,118 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
-  <title>Add / Edit Catch</title>
-  <link rel="stylesheet" href="./assets/css/styles.css">
+  <title>Reel Stats | Catch Form</title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
 </head>
 <body>
-  <header>
+  <header class="site-header">
     <nav class="nav">
-      <div class="brand">
-        <img src="./assets/icons/icon-192.png" alt="logo">
-        <span>Fish Catch Tracker</span>
-      </div>
+      <a class="brand" href="./index.html">
+        <span class="brand-mark"><img src="./assets/icons/icon-192.png" alt="Reel Stats logo" /></span>
+        <span class="brand-text">
+          <strong>Reel Stats</strong>
+          <span>Offline fishing journal</span>
+        </span>
+      </a>
       <div class="nav-links">
-        <a href="./index.html">Dashboard</a>
-        <a href="./catch-form.html" class="active">Add Catch</a>
-        <a href="./gallery.html">Gallery</a>
-        <a href="./map.html">Map</a>
-        <a href="./backup.html">Backup</a>
+        <a class="nav-link" href="./index.html">Dashboard</a>
+        <a class="nav-link" href="./trips.html">Trips</a>
+        <a class="nav-link active" href="./catch-form.html">Add Catch</a>
+        <a class="nav-link" href="./gallery.html">Gallery</a>
+        <a class="nav-link" href="./map.html">Map</a>
+        <a class="nav-link" href="./backup.html">Backup</a>
       </div>
     </nav>
   </header>
 
-  <main>
-    <div class="card">
-      <h1 id="form-title">Add Catch</h1>
+  <main class="page-shell">
+    <section class="page-hero">
+      <div>
+        <p class="eyebrow">Catch Entry</p>
+        <h1 id="form-title">Log a catch</h1>
+        <p class="hero-copy">
+          Save the fish details, attach the catch to a trip, add photos, and keep everything available offline.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a class="btn secondary" href="./trips.html">View trips</a>
+        <a class="btn secondary" href="./gallery.html">Open gallery</a>
+      </div>
+    </section>
+
+    <section class="panel">
       <form id="catch-form" novalidate>
-        <div class="inline">
-          <div>
-            <label for="species">Species *</label>
-            <input id="species" name="species" required placeholder="Largemouth bass">
-            <div class="error" data-error-for="species"></div>
-          </div>
-          <div>
-            <label for="nickname">Nickname</label>
-            <input id="nickname" name="nickname" placeholder="Optional">
-          </div>
-        </div>
-
-        <div class="inline">
-          <div>
-            <label for="dateCaught">Date *</label>
-            <input type="date" id="dateCaught" name="dateCaught" required>
-            <div class="error" data-error-for="dateCaught"></div>
-          </div>
-          <div>
-            <label for="locationName">Location *</label>
-            <input id="locationName" name="locationName" required placeholder="Lake name or spot">
-            <div class="error" data-error-for="locationName"></div>
-          </div>
-        </div>
-
-        <div class="inline">
-          <div>
-            <label for="lat">Latitude *</label>
-            <input type="number" step="0.0001" id="lat" name="lat" required placeholder="e.g., 38.8977">
-            <div class="error" data-error-for="lat"></div>
-          </div>
-          <div>
-            <label for="lng">Longitude *</label>
-            <input type="number" step="0.0001" id="lng" name="lng" required placeholder="-77.0365">
-            <div class="error" data-error-for="lng"></div>
-          </div>
-        </div>
-
-        <div class="inline">
-          <div>
-            <label for="weight">Weight *</label>
-            <div class="inline">
-              <input type="number" step="0.01" id="weight" name="weight" required placeholder="4.8">
-              <select id="weightUnit" name="weightUnit">
-                <option value="lb">lb</option>
-                <option value="kg">kg</option>
-              </select>
+        <div class="form-grid">
+          <section class="panel inset">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Trip Link</p>
+                <h2>Attach this catch to a fishing session</h2>
+              </div>
             </div>
-            <div class="error" data-error-for="weight"></div>
-          </div>
-          <div>
-            <label for="length">Length *</label>
-            <div class="inline">
-              <input type="number" step="0.1" id="length" name="length" required placeholder="19.5">
-              <select id="lengthUnit" name="lengthUnit">
-                <option value="in">in</option>
-                <option value="cm">cm</option>
+            <div>
+              <label for="tripId">Fishing trip</label>
+              <select id="tripId" name="tripId">
+                <option value="">Standalone catch</option>
               </select>
+              <p class="helper-text">Link catches to a trip so the calendar, weather, and ratings stay connected.</p>
+              <div id="trip-summary"></div>
             </div>
-            <div class="error" data-error-for="length"></div>
-          </div>
+            <div class="btn-row">
+              <button type="button" class="secondary" id="use-trip-details">Use trip details</button>
+              <a class="btn secondary" href="./trip-form.html">Log a new trip</a>
+            </div>
+          </section>
+
+          <section class="panel inset">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Catch Details</p>
+                <h2>Species, size, and date</h2>
+              </div>
+            </div>
+            <div class="form-row">
+              <div>
+                <label for="species">Species</label>
+                <input id="species" name="species" required placeholder="Largemouth bass" />
+                <div class="error" data-error-for="species"></div>
+              </div>
+              <div>
+                <label for="nickname">Nickname</label>
+                <input id="nickname" name="nickname" placeholder="Optional name or tag" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div>
+                <label for="dateCaught">Date</label>
+                <input type="date" id="dateCaught" name="dateCaught" required />
+                <div class="error" data-error-for="dateCaught"></div>
+              </div>
+              <div>
+                <label for="locationName">Location name</label>
+                <input id="locationName" name="locationName" required placeholder="Lake, river, or shoreline" />
+                <div class="error" data-error-for="locationName"></div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div>
+                <label for="weight">Weight</label>
+                <div class="inline-pair">
+                  <input type="number" step="0.01" id="weight" name="weight" required placeholder="4.80" />
+                  <select id="weightUnit" name="weightUnit">
+                    <option value="lb">lb</option>
+                    <option value="kg">kg</option>
+                  </select>
+                </div>
+                <div class="error" data-error-for="weight"></div>
+              </div>
+              <div>
+                <label for="length">Length</label>
+                <div class="inline-pair">
+                  <input type="number" step="0.1" id="length" name="length" required placeholder="19.5" />
+                  <select id="lengthUnit" name="lengthUnit">
+                    <option value="in">in</option>
+                    <option value="cm">cm</option>
+                  </select>
+                </div>
+                <div class="error" data-error-for="length"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel inset">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Location</p>
+                <h2>Coordinates</h2>
+              </div>
+            </div>
+            <div class="form-row">
+              <div>
+                <label for="lat">Latitude</label>
+                <input type="number" step="0.0001" id="lat" name="lat" required placeholder="38.8977" />
+                <div class="error" data-error-for="lat"></div>
+              </div>
+              <div>
+                <label for="lng">Longitude</label>
+                <input type="number" step="0.0001" id="lng" name="lng" required placeholder="-77.0365" />
+                <div class="error" data-error-for="lng"></div>
+              </div>
+            </div>
+            <div class="btn-row">
+              <button type="button" class="secondary" id="use-location">Use current location</button>
+            </div>
+            <p class="helper-text" id="location-status">Use the trip details or your device location to fill the coordinates faster.</p>
+          </section>
+
+          <section class="panel inset">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Notes</p>
+                <h2>Extra context</h2>
+              </div>
+            </div>
+            <div>
+              <label for="notes">Catch notes</label>
+              <textarea id="notes" name="notes" placeholder="Lure, retrieve, structure, fish behavior, or any other detail you want to remember."></textarea>
+            </div>
+          </section>
+
+          <section class="panel inset">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Photos</p>
+                <h2>Store images offline</h2>
+              </div>
+            </div>
+            <div>
+              <label for="photos">Catch photos</label>
+              <input type="file" id="photos" accept="image/*" multiple />
+              <p class="helper-text">Images are resized locally before saving so the app stays fast on mobile.</p>
+            </div>
+            <div id="photo-preview" class="stack"></div>
+          </section>
         </div>
 
-        <div>
-          <label for="notes">Notes</label>
-          <textarea id="notes" name="notes" placeholder="Conditions, lure, depth..."></textarea>
-        </div>
-
-        <div>
-          <label for="photos">Photos</label>
-          <input type="file" id="photos" accept="image/*" multiple>
-          <div class="muted" style="margin-top:6px;">Images are resized locally (1600px full, 400px thumb) before saving.</div>
-          <div id="photo-preview" class="chips" style="margin-top:10px;"></div>
-        </div>
-
-        <div class="btn-row">
-          <button type="submit">Save Catch</button>
+        <div class="btn-row" style="margin-top: 18px;">
+          <button type="submit">Save catch</button>
           <a class="btn secondary" href="./index.html">Cancel</a>
         </div>
       </form>
-    </div>
+    </section>
   </main>
+
+  <nav class="tabbar">
+    <a href="./index.html">Home</a>
+    <a href="./trips.html">Trips</a>
+    <a class="active" href="./catch-form.html">Catch</a>
+    <a href="./gallery.html">Gallery</a>
+    <a href="./map.html">Map</a>
+  </nav>
 
   <div id="toast" class="toast"></div>
 

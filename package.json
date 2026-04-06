@@ -1,6 +1,6 @@
 {
-  "name": "fish-catch-tracker",
-  "version": "1.0.0",
+  "name": "reel-stats",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "dev": "python3 -m http.server 5173",

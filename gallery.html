@@ -1,55 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
-  <title>Gallery</title>
-  <link rel="stylesheet" href="./assets/css/styles.css">
+  <title>Reel Stats | Gallery</title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
 </head>
 <body>
-  <header>
+  <header class="site-header">
     <nav class="nav">
-      <div class="brand">
-        <img src="./assets/icons/icon-192.png" alt="logo">
-        <span>Fish Catch Tracker</span>
-      </div>
+      <a class="brand" href="./index.html">
+        <span class="brand-mark"><img src="./assets/icons/icon-192.png" alt="Reel Stats logo" /></span>
+        <span class="brand-text">
+          <strong>Reel Stats</strong>
+          <span>Offline fishing journal</span>
+        </span>
+      </a>
       <div class="nav-links">
-        <a href="./index.html">Dashboard</a>
-        <a href="./catch-form.html">Add Catch</a>
-        <a href="./gallery.html" class="active">Gallery</a>
-        <a href="./map.html">Map</a>
-        <a href="./backup.html">Backup</a>
+        <a class="nav-link" href="./index.html">Dashboard</a>
+        <a class="nav-link" href="./trips.html">Trips</a>
+        <a class="nav-link" href="./catch-form.html">Add Catch</a>
+        <a class="nav-link active" href="./gallery.html">Gallery</a>
+        <a class="nav-link" href="./map.html">Map</a>
+        <a class="nav-link" href="./backup.html">Backup</a>
       </div>
     </nav>
   </header>
 
-  <main>
-    <h1>Gallery</h1>
-    <div class="filters">
-      <input id="search" placeholder="Search species, nickname, location, notes">
-      <select id="filter-species">
-        <option value="">All species</option>
-      </select>
-      <select id="sort">
-        <option value="newest">Newest</option>
-        <option value="oldest">Oldest</option>
-        <option value="heaviest">Heaviest</option>
-        <option value="longest">Longest</option>
-      </select>
-      <label style="display:flex;align-items:center;gap:8px;">
-        <input type="checkbox" id="pb-only">
-        PB only
-      </label>
-      <input type="date" id="from-date" />
-      <input type="date" id="to-date" />
-    </div>
+  <main class="page-shell">
+    <section class="page-hero">
+      <div>
+        <p class="eyebrow">Catch Gallery</p>
+        <h1>Review every catch in one place.</h1>
+        <p class="hero-copy">
+          Search by species, notes, or location, then sort by size or date to spot trends across the season.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a class="btn" href="./catch-form.html">Add catch</a>
+        <a class="btn secondary" href="./trips.html">Open trips</a>
+      </div>
+    </section>
 
-    <div id="gallery" class="gallery-grid"></div>
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">Filters</p>
+          <h2>Find the catches you want fast</h2>
+        </div>
+        <span id="gallery-summary" class="muted">0 catches shown</span>
+      </div>
+      <div class="filters">
+        <input id="search" placeholder="Search species, notes, location, or trip context" />
+        <select id="filter-species">
+          <option value="">All species</option>
+        </select>
+        <select id="sort">
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+          <option value="heaviest">Heaviest</option>
+          <option value="longest">Longest</option>
+        </select>
+        <label class="toggle-field" for="pb-only">
+          <span>Personal best only</span>
+          <input type="checkbox" id="pb-only" />
+        </label>
+        <input type="date" id="from-date" />
+        <input type="date" id="to-date" />
+      </div>
+    </section>
+
+    <section id="gallery" class="panel-grid three-col" style="margin-top: 18px;"></section>
   </main>
+
+  <nav class="tabbar">
+    <a href="./index.html">Home</a>
+    <a href="./trips.html">Trips</a>
+    <a href="./catch-form.html">Catch</a>
+    <a class="active" href="./gallery.html">Gallery</a>
+    <a href="./map.html">Map</a>
+  </nav>
 
   <div id="toast" class="toast"></div>
 

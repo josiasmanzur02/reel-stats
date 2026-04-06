@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
-  <title>Reel Stats | Dashboard</title>
+  <title>Reel Stats | Trips</title>
   <link rel="stylesheet" href="./assets/css/styles.css" />
 </head>
 <body>
@@ -21,8 +21,8 @@
         </span>
       </a>
       <div class="nav-links">
-        <a class="nav-link active" href="./index.html">Dashboard</a>
-        <a class="nav-link" href="./trips.html">Trips</a>
+        <a class="nav-link" href="./index.html">Dashboard</a>
+        <a class="nav-link active" href="./trips.html">Trips</a>
         <a class="nav-link" href="./catch-form.html">Add Catch</a>
         <a class="nav-link" href="./gallery.html">Gallery</a>
         <a class="nav-link" href="./map.html">Map</a>
@@ -34,91 +34,79 @@
   <main class="page-shell">
     <section class="page-hero">
       <div>
-        <p class="eyebrow">Offline Fishing Journal</p>
-        <h1>Track trips, catches, and conditions anywhere.</h1>
+        <p class="eyebrow">Fishing Log</p>
+        <h1>Keep a calendar of every trip.</h1>
         <p class="hero-copy">
-          Save fishing sessions, log catches, capture location and weather, and review your season from a mobile-first dashboard that keeps working offline.
+          Rate each outing, capture notes and weather, and build a calendar that shows where and when you spent time fishing.
         </p>
       </div>
       <div class="hero-actions">
         <a class="btn" href="./trip-form.html">Log a trip</a>
-        <a class="btn secondary" href="./catch-form.html">Add a catch</a>
+        <a class="btn secondary" href="./catch-form.html">Add catch</a>
       </div>
     </section>
 
     <section class="metrics-grid">
       <article class="metric-card">
-        <span class="eyebrow small">Catches</span>
-        <strong id="stat-catches">0</strong>
-        <p class="muted">Saved on this device</p>
-      </article>
-      <article class="metric-card">
         <span class="eyebrow small">Trips</span>
-        <strong id="stat-trips">0</strong>
+        <strong id="trip-stat-total">0</strong>
         <p class="muted">Logged sessions</p>
       </article>
       <article class="metric-card">
         <span class="eyebrow small">Hours</span>
-        <strong id="stat-hours">0</strong>
+        <strong id="trip-stat-hours">0</strong>
         <p class="muted">Time on the water</p>
       </article>
       <article class="metric-card">
         <span class="eyebrow small">Average Rating</span>
-        <strong id="stat-rating">Not rated</strong>
-        <p class="muted">Trip quality score</p>
+        <strong id="trip-stat-rating">Not rated</strong>
+        <p class="muted">Session score</p>
+      </article>
+      <article class="metric-card">
+        <span class="eyebrow small">Spots</span>
+        <strong id="trip-stat-spots">0</strong>
+        <p class="muted">Unique locations</p>
       </article>
     </section>
 
     <section class="page-grid two-col">
-      <article class="panel">
+      <article class="panel calendar-shell">
         <div class="panel-header">
           <div>
-            <p class="eyebrow">Latest Trip</p>
-            <h2>Most recent fishing session</h2>
+            <p class="eyebrow">Calendar</p>
+            <h2>Monthly trip view</h2>
           </div>
-          <a class="btn secondary desktop-only" href="./trips.html">Open log</a>
+          <button id="clear-day-filter" class="secondary" type="button">Clear day</button>
         </div>
-        <div id="recent-trip"></div>
+        <div class="calendar-toolbar">
+          <div class="btn-row">
+            <button id="month-prev" class="secondary" type="button">Previous</button>
+            <button id="month-reset" class="secondary" type="button">Today</button>
+            <button id="month-next" class="secondary" type="button">Next</button>
+          </div>
+          <strong id="month-label">Month</strong>
+        </div>
+        <div id="calendar-grid" class="calendar-grid"></div>
       </article>
 
       <article class="panel">
         <div class="panel-header">
           <div>
-            <p class="eyebrow">Latest Catch</p>
-            <h2>Most recent catch entry</h2>
+            <p class="eyebrow">Trip List</p>
+            <h2 id="active-label">Showing this month</h2>
           </div>
-          <a class="btn secondary desktop-only" href="./gallery.html">Open gallery</a>
         </div>
-        <div id="recent-catch"></div>
+        <input id="trip-search" placeholder="Search locations, notes, or conditions" />
+        <p class="helper-text">Tap a day on the calendar to filter the list below.</p>
       </article>
     </section>
 
-    <section class="panel-grid two-col" style="margin-top: 18px;">
-      <article class="panel">
-        <div class="panel-header">
-          <div>
-            <p class="eyebrow">Personal Bests</p>
-            <h2>Standout catches</h2>
-          </div>
-        </div>
-        <div id="pb-list" class="panel-grid"></div>
-      </article>
-
-      <article class="panel">
-        <div class="panel-header">
-          <div>
-            <p class="eyebrow">Spots</p>
-            <h2>Most visited locations</h2>
-          </div>
-        </div>
-        <div id="spot-list" class="panel-grid"></div>
-      </article>
-    </section>
+    <section id="trip-list" class="panel-grid" style="margin-top: 18px;"></section>
   </main>
 
   <nav class="tabbar">
-    <a class="active" href="./index.html">Home</a>
-    <a href="./trips.html">Trips</a>
+    <a href="./index.html">Home</a>
+    <a class="active" href="./trips.html">Trips</a>
     <a href="./catch-form.html">Catch</a>
     <a href="./gallery.html">Gallery</a>
     <a href="./map.html">Map</a>
@@ -126,7 +114,7 @@
 
   <div id="toast" class="toast"></div>
 
-  <script type="module" src="./assets/js/dashboard.js"></script>
+  <script type="module" src="./assets/js/trips.js"></script>
   <script type="module" src="./assets/js/sw-register.js"></script>
 </body>
 </html>

@@ -1,48 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
-  <title>Catch Detail</title>
-  <link rel="stylesheet" href="./assets/css/styles.css">
+  <title>Reel Stats | Catch Detail</title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
 </head>
 <body>
-  <header>
+  <header class="site-header">
     <nav class="nav">
-      <div class="brand">
-        <img src="./assets/icons/icon-192.png" alt="logo">
-        <span>Fish Catch Tracker</span>
-      </div>
+      <a class="brand" href="./index.html">
+        <span class="brand-mark"><img src="./assets/icons/icon-192.png" alt="Reel Stats logo" /></span>
+        <span class="brand-text">
+          <strong>Reel Stats</strong>
+          <span>Offline fishing journal</span>
+        </span>
+      </a>
       <div class="nav-links">
-        <a href="./index.html">Dashboard</a>
-        <a href="./catch-form.html">Add Catch</a>
-        <a href="./gallery.html">Gallery</a>
-        <a href="./map.html">Map</a>
-        <a href="./backup.html">Backup</a>
+        <a class="nav-link" href="./index.html">Dashboard</a>
+        <a class="nav-link" href="./trips.html">Trips</a>
+        <a class="nav-link" href="./catch-form.html">Add Catch</a>
+        <a class="nav-link active" href="./gallery.html">Gallery</a>
+        <a class="nav-link" href="./map.html">Map</a>
+        <a class="nav-link" href="./backup.html">Backup</a>
       </div>
     </nav>
   </header>
 
-  <main>
-    <div class="card">
-      <div class="btn-row" style="justify-content: flex-end; margin-bottom: 8px;">
-        <a class="btn secondary" id="edit-btn" href="#">Edit</a>
-        <button class="danger btn" id="delete-btn" type="button">Delete</button>
+  <main class="page-shell">
+    <section class="page-hero">
+      <div>
+        <p class="eyebrow">Catch Detail</p>
+        <h1 id="title">Catch</h1>
+        <p class="hero-copy" id="meta">Catch detail</p>
       </div>
-      <h1 id="title">Catch</h1>
-      <div id="badges" class="chips"></div>
-      <p class="muted" id="meta"></p>
-      <div class="carousel" id="photo-strip"></div>
-      <div class="grid cards" id="detail-grid">
-        <!-- populated via JS -->
+      <div class="hero-actions">
+        <div id="badges" class="chip-row"></div>
+        <a class="btn secondary" id="edit-btn" href="#">Edit catch</a>
+        <button id="delete-btn" class="ghost danger-text" type="button">Delete catch</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div id="photo-strip" class="carousel"></div>
+    </section>
+
+    <section class="metrics-grid" id="detail-grid"></section>
+
+    <section class="page-grid two-col">
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Trip Context</p>
+            <h2>Linked fishing session</h2>
+          </div>
+        </div>
+        <div id="trip-context"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Weather</p>
+            <h2>Conditions snapshot</h2>
+          </div>
+        </div>
+        <div id="weather-context"></div>
+      </article>
+    </section>
+
+    <section class="panel" style="margin-top: 18px;">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">Notes</p>
+          <h2>Catch and trip notes</h2>
+        </div>
       </div>
       <div id="notes-block"></div>
-    </div>
+    </section>
   </main>
+
+  <nav class="tabbar">
+    <a href="./index.html">Home</a>
+    <a href="./trips.html">Trips</a>
+    <a href="./catch-form.html">Catch</a>
+    <a class="active" href="./gallery.html">Gallery</a>
+    <a href="./map.html">Map</a>
+  </nav>
 
   <div id="toast" class="toast"></div>
 

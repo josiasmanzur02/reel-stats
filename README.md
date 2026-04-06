@@ -1,78 +1,56 @@
-# Fish Catch Tracker (PWA)
-Offline‑first, installable (iOS/Android/desktop) web app for logging fish catches. All data stays on-device in IndexedDB; no server needed.
+# Reel Stats
+Offline-first fishing log and catch tracker built with plain HTML, CSS, and JavaScript.
 
-## Features
-- Add/Edit/Delete catches with photos, notes, weight/length units, and geo coords.
-- Automatic Personal Best flags per species for weight and length (newest wins ties).
-- Gallery with search, filters (species, PB-only, date range) and sorting (new/old/heaviest/longest).
-- Detail view with photo carousel, PB badges, edit/delete.
-- Map with Leaflet + OpenStreetMap, species filter, popups linking to detail.
-- Backup/Restore: export JSON and ZIP (photos included), download or Web Share when supported; merge or replace imports; reset local data.
-- Offline ready after first load; service worker precaches app shell and CDN libs; manifest + iOS meta for Add to Home Screen.
+## What It Does
+- Log fishing trips with a start and end time, trip rating, notes, manual condition notes, and weather snapshots.
+- Link catches to trips so your calendar, gallery, dashboard, and map stay connected.
+- Save photos locally in IndexedDB with automatic client-side resizing.
+- Use your device location in the trip and catch forms.
+- Review activity in a mobile-first dashboard, trip calendar, catch gallery, and map.
+- Export or import a single JSON backup that includes trips, catches, photos, notes, and weather data.
+- Keep the app shell available offline with a service worker and locally bundled map library assets.
 
-## Tech Stack
-- Vanilla HTML/CSS/JS (ES modules), no build tooling required.
-- IndexedDB via minimal wrapper (Dexie not used to avoid external install).
-- Leaflet via CDN for maps; JSZip via CDN for ZIP export.
-- Service worker for precache + runtime cache; manifest with maskable icons.
-
-## Project Structure
-```
-index.html              // Dashboard
-catch-form.html         // Add/Edit catch
-gallery.html            // Gallery
-catch.html              // Catch detail
-map.html                // Map
-backup.html             // Import/Export/Reset
+## Structure
+```text
+index.html              Dashboard
+trips.html              Trip log + calendar
+trip-form.html          Add/Edit trip
+catch-form.html         Add/Edit catch
+gallery.html            Catch gallery
+catch.html              Catch detail
+map.html                Trips + catches map
+backup.html             Backup / restore / reset
 service-worker.js
 manifest.webmanifest
 assets/
   css/styles.css
-  js/*.js               // data layer, pages, utils, UI, SW register
-  icons/                // PWA icons
-package.json            // scripts for dev/build/preview
+  js/
+    db.js               IndexedDB data layer
+    weather.js          Weather snapshot helper
+    trips.js            Calendar + trip list page logic
+    trip-form.js        Trip form logic
+    form.js             Catch form logic
+    dashboard.js        Dashboard logic
+    gallery.js          Gallery logic
+    detail.js           Catch detail logic
+    map.js              Map logic
+    backup.js           Backup / import logic
+  vendor/leaflet/       Local map assets for offline use
 ```
 
-## Run Locally
-Prereq: Python 3 (for simple static server).
+## Run
 ```sh
-npm run dev        # serves at http://localhost:5173
+npm run dev
 ```
-First visit online to allow the service worker to cache external CDNs (Leaflet, JSZip). Data persists in IndexedDB between refreshes.
 
 ## Build
-Creates static `dist/` ready for any static host.
 ```sh
 npm run build
 ```
-Preview the build:
-```sh
-npm run preview    # serves dist at http://localhost:4173
-```
 
-## Deploy to GitHub + Render (Static Site)
-1) Commit and push:
-```sh
-git init
-git add .
-git commit -m "Initial Fish Catch Tracker PWA"
-git branch -M main
-git remote add origin git@github.com:<you>/fish-catch-tracker.git
-git push -u origin main
-```
-2) Render dashboard → New → Static Site → connect the repo.
-   - Build Command: `npm run build`
-   - Publish Directory: `dist`
-   - Index Document: `index.html`
-   - 404/Fallback: `index.html` (for client-side nav)
-3) Deploy. Render auto-redeploys on pushes.
+The build output is written to `dist/`.
 
-## Import/Export & Backup
-- Export JSON (always) and ZIP (with photos). Download and, if supported, share via Web Share API.
-- Import supports JSON/ZIP with preview; choose Merge (add new IDs) or Replace (wipe then import).
-- “Reset local data” wipes IndexedDB on this device only.
-
-## Notes
-- Map tiles load from OpenStreetMap; cached tiles work offline only for areas already viewed.
-- For iOS: open in Safari, tap Share → Add to Home Screen to install as a PWA.
-- Service worker and manifest live at the site root; keep paths if you change hosting structure.
+## Offline Notes
+- The app shell, local assets, and previously viewed map tiles are cached by the service worker.
+- Weather snapshots are fetched when a connection is available and then stored with the trip.
+- If you create a trip fully offline, you can still save it immediately and add manual condition notes; the weather can be refreshed later.

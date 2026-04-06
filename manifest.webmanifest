@@ -1,10 +1,10 @@
 {
-  "name": "Fish Catch Tracker",
-  "short_name": "Catch Tracker",
+  "name": "Reel Stats",
+  "short_name": "Reel Stats",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#073B70",
-  "theme_color": "#38B795",
+  "background_color": "#edf3f7",
+  "theme_color": "#0f4c5c",
   "orientation": "portrait",
   "icons": [
     {

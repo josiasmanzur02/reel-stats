@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <title>Reel Stats | Trip Form</title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="brand" href="./index.html">
+        <span class="brand-mark"><img src="./assets/icons/icon-192.png" alt="Reel Stats logo" /></span>
+        <span class="brand-text">
+          <strong>Reel Stats</strong>
+          <span>Offline fishing journal</span>
+        </span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="./index.html">Dashboard</a>
+        <a class="nav-link active" href="./trips.html">Trips</a>
+        <a class="nav-link" href="./catch-form.html">Add Catch</a>
+        <a class="nav-link" href="./gallery.html">Gallery</a>
+        <a class="nav-link" href="./map.html">Map</a>
+        <a class="nav-link" href="./backup.html">Backup</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <section class="page-hero">
+      <div>
+        <p class="eyebrow">Trip Form</p>
+        <h1 id="form-title">Log a fishing trip</h1>
+        <p class="hero-copy">
+          Save your time range, rating, notes, and a weather snapshot. The form can read your current location automatically on supported devices.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a class="btn secondary" href="./trips.html">Back to trips</a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <form id="trip-form" novalidate>
+        <div class="form-grid">
+          <section class="panel inset">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Timing</p>
+                <h2>When were you fishing?</h2>
+              </div>
+            </div>
+            <div class="form-row">
+              <div>
+                <label for="startAt">Start time</label>
+                <input type="datetime-local" id="startAt" name="startAt" required />
+                <div class="error" data-error-for="startAt"></div>
+              </div>
+              <div>
+                <label for="endAt">End time</label>
+                <input type="datetime-local" id="endAt" name="endAt" required />
+                <div class="error" data-error-for="endAt"></div>
+              </div>
+            </div>
+            <div>
+              <label for="rating">Trip rating</label>
+              <select id="rating" name="rating">
+                <option value="">Not rated yet</option>
+                <option value="1">1 / 5</option>
+                <option value="2">2 / 5</option>
+                <option value="3">3 / 5</option>
+                <option value="4">4 / 5</option>
+                <option value="5">5 / 5</option>
+              </select>
+            </div>
+          </section>
+
+          <section class="panel inset">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Location</p>
+                <h2>Where did you fish?</h2>
+              </div>
+            </div>
+            <div>
+              <label for="locationName">Location name</label>
+              <input id="locationName" name="locationName" required placeholder="Lake, river, pier, or shoreline" />
+              <div class="error" data-error-for="locationName"></div>
+            </div>
+            <div class="form-row">
+              <div>
+                <label for="lat">Latitude</label>
+                <input type="number" step="0.0001" id="lat" name="lat" required placeholder="38.8977" />
+                <div class="error" data-error-for="lat"></div>
+              </div>
+              <div>
+                <label for="lng">Longitude</label>
+                <input type="number" step="0.0001" id="lng" name="lng" required placeholder="-77.0365" />
+                <div class="error" data-error-for="lng"></div>
+              </div>
+            </div>
+            <div class="btn-row">
+              <button id="use-location" class="secondary" type="button">Use current location</button>
+            </div>
+            <p id="geo-status" class="helper-text">If permission is granted, the form will read your device position for you.</p>
+          </section>
+
+          <section class="panel inset">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Conditions</p>
+                <h2>Observations from the day</h2>
+              </div>
+            </div>
+            <div>
+              <label for="conditionsNotes">Manual condition notes</label>
+              <textarea id="conditionsNotes" name="conditionsNotes" placeholder="Water clarity, current, tide, bait activity, or anything else the weather feed will not capture."></textarea>
+            </div>
+            <div>
+              <label for="notes">Trip notes</label>
+              <textarea id="notes" name="notes" placeholder="How the outing went, what you would change next time, or extra context about the spot."></textarea>
+            </div>
+          </section>
+
+          <section class="panel inset">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Weather</p>
+                <h2>Automatic weather snapshot</h2>
+              </div>
+            </div>
+            <div class="note-card">
+              <strong id="weather-summary">Weather not captured yet.</strong>
+              <span id="weather-meta">Weather will be saved with the trip when a location and time range are available.</span>
+            </div>
+            <div class="btn-row">
+              <button id="refresh-weather" class="secondary" type="button">Refresh weather</button>
+            </div>
+          </section>
+        </div>
+
+        <div class="btn-row" style="margin-top: 18px;">
+          <button type="submit" value="save">Save trip</button>
+          <button type="submit" class="secondary" value="catch">Save and add catch</button>
+          <a class="btn secondary" href="./trips.html">Cancel</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <nav class="tabbar">
+    <a href="./index.html">Home</a>
+    <a class="active" href="./trips.html">Trips</a>
+    <a href="./catch-form.html">Catch</a>
+    <a href="./gallery.html">Gallery</a>
+    <a href="./map.html">Map</a>
+  </nav>
+
+  <div id="toast" class="toast"></div>
+
+  <script type="module" src="./assets/js/trip-form.js"></script>
+  <script type="module" src="./assets/js/sw-register.js"></script>
+</body>
+</html>

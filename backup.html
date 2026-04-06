@@ -1,62 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
-  <title>Backup / Import</title>
-  <link rel="stylesheet" href="./assets/css/styles.css">
+  <title>Reel Stats | Backup</title>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
 </head>
 <body>
-  <header>
+  <header class="site-header">
     <nav class="nav">
-      <div class="brand">
-        <img src="./assets/icons/icon-192.png" alt="logo">
-        <span>Fish Catch Tracker</span>
-      </div>
+      <a class="brand" href="./index.html">
+        <span class="brand-mark"><img src="./assets/icons/icon-192.png" alt="Reel Stats logo" /></span>
+        <span class="brand-text">
+          <strong>Reel Stats</strong>
+          <span>Offline fishing journal</span>
+        </span>
+      </a>
       <div class="nav-links">
-        <a href="./index.html">Dashboard</a>
-        <a href="./catch-form.html">Add Catch</a>
-        <a href="./gallery.html">Gallery</a>
-        <a href="./map.html">Map</a>
-        <a href="./backup.html" class="active">Backup</a>
+        <a class="nav-link" href="./index.html">Dashboard</a>
+        <a class="nav-link" href="./trips.html">Trips</a>
+        <a class="nav-link" href="./catch-form.html">Add Catch</a>
+        <a class="nav-link" href="./gallery.html">Gallery</a>
+        <a class="nav-link" href="./map.html">Map</a>
+        <a class="nav-link active" href="./backup.html">Backup</a>
       </div>
     </nav>
   </header>
 
-  <main>
-    <div class="grid cards">
-      <div class="card">
-        <h2>Export</h2>
-        <p class="muted">Everything stays local. Export to carry over to another device.</p>
+  <main class="page-shell">
+    <section class="page-hero">
+      <div>
+        <p class="eyebrow">Backup</p>
+        <h1>Protect your offline fishing log.</h1>
+        <p class="hero-copy">
+          Export one JSON backup that includes trips, catches, notes, weather snapshots, and photos so you can move the app between devices.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <button id="export-json" type="button">Download backup</button>
+        <button id="export-share" class="secondary" type="button">Share backup</button>
+      </div>
+    </section>
+
+    <section class="panel-grid two-col">
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Import</p>
+            <h2>Restore from a JSON backup</h2>
+          </div>
+        </div>
+        <input type="file" id="import-file" accept=".json" />
+        <div class="btn-row" style="margin-top: 14px;">
+          <button id="import-merge" type="button">Import and merge</button>
+          <button id="import-replace" class="secondary" type="button">Replace everything</button>
+        </div>
+        <pre id="import-preview" class="note-card" style="white-space: pre-wrap;"></pre>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Reset</p>
+            <h2>Clear all local data</h2>
+          </div>
+        </div>
+        <p class="muted">
+          Reset removes trips, catches, photos, and notes from this device only. Export a backup first if you want a copy.
+        </p>
         <div class="btn-row">
-          <button id="export-json">Download JSON</button>
-          <button id="export-zip" class="secondary">Download ZIP</button>
-          <button id="export-share" class="secondary">Share (if supported)</button>
+          <button id="reset-btn" class="ghost danger-text" type="button">Reset local data</button>
         </div>
-      </div>
-
-      <div class="card">
-        <h2>Import</h2>
-        <p class="muted">Review summary before applying. JSON always supported; ZIP if present.</p>
-        <input type="file" id="import-file" accept=".json,.zip">
-        <div class="btn-row" style="margin-top:10px;">
-          <button id="import-merge">Import – Merge</button>
-          <button id="import-replace" class="secondary">Import – Replace</button>
-        </div>
-        <pre id="import-preview" class="muted" style="white-space:pre-wrap;"></pre>
-      </div>
-
-      <div class="card">
-        <h2>Reset</h2>
-        <p class="muted">Wipe all local data from this device.</p>
-        <button id="reset-btn" class="btn danger">Reset local data</button>
-      </div>
-    </div>
+      </article>
+    </section>
   </main>
+
+  <nav class="tabbar">
+    <a href="./index.html">Home</a>
+    <a href="./trips.html">Trips</a>
+    <a href="./catch-form.html">Catch</a>
+    <a href="./gallery.html">Gallery</a>
+    <a href="./map.html">Map</a>
+  </nav>
 
   <div id="toast" class="toast"></div>
 
